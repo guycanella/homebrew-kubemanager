@@ -24,10 +24,9 @@ class KubemanagerLite < Formula
   
     def install
       on_macos do
-        app_name = Dir["*.app"].first
-        raise "No .app bundle found in #{Dir.pwd}" if app_name.nil?
-        prefix.install app_name
-        bin.write_exec_script prefix/app_name/"Contents/MacOS/kubemanager_lite"
+        app_bundle = Pathname.new(Dir.pwd)
+        prefix.install app_bundle
+        bin.write_exec_script prefix/app_bundle.basename/"Contents/MacOS/kubemanager_lite"
       end
   
       on_linux do
@@ -54,8 +53,8 @@ class KubemanagerLite < Formula
     test do
       # Verify the binary exists and is executable
       on_macos do
-        app_name = Dir["#{prefix}/*.app"].first
-        assert_predicate Pathname.new("#{app_name}/Contents/MacOS/kubemanager_lite"), :executable?
+        app_bundle = Dir["#{prefix}/*.app"].first
+        assert_predicate Pathname.new("#{app_bundle}/Contents/MacOS/kubemanager_lite"), :executable?
       end
       on_linux do
         assert_predicate bin/"kubemanager-lite", :executable?
