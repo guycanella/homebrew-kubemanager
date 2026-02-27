@@ -4,22 +4,22 @@
 class KubemanagerLite < Formula
     desc "Desktop app for real-time Docker container and Kubernetes pod management"
     homepage "https://github.com/guycanella/kubemanager-lite"
-    version "1.1.0"
+    version "1.1.1"
     license "MIT"
   
     on_macos do
       if Hardware::CPU.arm?
         url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-v#{version}-macos-arm64.zip"
-        sha256 "65ce19b918edac42f1ed746dabaa4bccf24f8af6a8ff4a5b9f15367b57a2c3d5"
+        sha256 "8c88ef50b672ed52f29eb595a21325a7893f9d4a7550e9e802e4e0953eb16117"
       else
         url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-v#{version}-macos-amd64.zip"
-        sha256 "1508d14f7f2b3d82c2ea4637aef945aa8326545615548f612b628841183cc67f"
+        sha256 "aa859f8284a16daab8557bf2255cdf48cb46051a851d7154f0005b9c7810a697"
       end
     end
   
     on_linux do
       url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-linux-amd64"
-      sha256 "04a91d6e39450a44ad3d2c7845af2114967e75f096f4e65594b72ba5c3c0b43d"
+      sha256 "683da9068662efe2d63e229d52ca7c750eced57f2a4a8fc2ade02e9046314820"
     end
   
     def install
