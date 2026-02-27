@@ -24,10 +24,12 @@ class KubemanagerLite < Formula
   
     def install
       on_macos do
-        # The zip contains a .app bundle — install it to the macOS Applications prefix
-        app_name = "KubeManager Lite.app"
+        app_name = if Hardware::CPU.arm?
+          "kubemanager_lite-macos-arm64.app"
+        else
+          "kubemanager_lite-macos-amd64.app"
+        end
         prefix.install app_name
-        # Expose a CLI shim so `kubemanager-lite` works from the terminal
         bin.write_exec_script prefix/app_name/"Contents/MacOS/kubemanager_lite"
       end
   
@@ -38,15 +40,16 @@ class KubemanagerLite < Formula
   
     def caveats
       on_macos do
+        app_name = Hardware::CPU.arm? ? "kubemanager_lite-macos-arm64.app" : "kubemanager_lite-macos-amd64.app"
         <<~EOS
           KubeManager Lite was installed to:
-            #{prefix}/KubeManager Lite.app
-  
+            #{prefix}/#{app_name}
+    
           To add it to your Applications folder:
-            ln -s "#{prefix}/KubeManager Lite.app" /Applications
-  
+            ln -s "#{prefix}/#{app_name}" /Applications
+    
           If macOS blocks the app on first launch (unsigned binary), run:
-            xattr -cr /Applications/KubeManager\\ Lite.app
+            xattr -cr "/Applications/#{app_name}"
         EOS
       end
     end
@@ -54,7 +57,8 @@ class KubemanagerLite < Formula
     test do
       # Verify the binary exists and is executable
       on_macos do
-        assert_predicate prefix/"KubeManager Lite.app/Contents/MacOS/kubemanager_lite", :executable?
+        app_name = Hardware::CPU.arm? ? "kubemanager_lite-macos-arm64.app" : "kubemanager_lite-macos-amd64.app"
+        assert_predicate prefix/"#{app_name}/Contents/MacOS/kubemanager_lite", :executable?
       end
       on_linux do
         assert_predicate bin/"kubemanager-lite", :executable?
