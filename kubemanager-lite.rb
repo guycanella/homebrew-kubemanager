@@ -24,11 +24,8 @@ class KubemanagerLite < Formula
   
     def install
       on_macos do
-        app_name = if Hardware::CPU.arm?
-          "kubemanager_lite-macos-arm64.app"
-        else
-          "kubemanager_lite-macos-amd64.app"
-        end
+        app_name = Dir["*.app"].first
+        raise "No .app bundle found in #{Dir.pwd}" if app_name.nil?
         prefix.install app_name
         bin.write_exec_script prefix/app_name/"Contents/MacOS/kubemanager_lite"
       end
@@ -40,7 +37,7 @@ class KubemanagerLite < Formula
   
     def caveats
       on_macos do
-        app_name = Hardware::CPU.arm? ? "kubemanager_lite-macos-arm64.app" : "kubemanager_lite-macos-amd64.app"
+        app_name = Dir["#{prefix}/*.app"].first&.split("/")&.last || "kubemanager_lite.app"
         <<~EOS
           KubeManager Lite was installed to:
             #{prefix}/#{app_name}
@@ -57,8 +54,8 @@ class KubemanagerLite < Formula
     test do
       # Verify the binary exists and is executable
       on_macos do
-        app_name = Hardware::CPU.arm? ? "kubemanager_lite-macos-arm64.app" : "kubemanager_lite-macos-amd64.app"
-        assert_predicate prefix/"#{app_name}/Contents/MacOS/kubemanager_lite", :executable?
+        app_name = Dir["#{prefix}/*.app"].first
+        assert_predicate Pathname.new("#{app_name}/Contents/MacOS/kubemanager_lite"), :executable?
       end
       on_linux do
         assert_predicate bin/"kubemanager-lite", :executable?
