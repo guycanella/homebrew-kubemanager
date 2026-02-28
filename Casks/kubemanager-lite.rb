@@ -16,11 +16,11 @@ cask "kubemanager-lite" do
     homepage "https://github.com/guycanella/kubemanager-lite"
   
     on_arm do
-      app "kubemanager_lite-macos-arm64.app"
+        app "kubemanager_lite-macos-arm64.app", target: "#{Dir.home}/Applications/kubemanager_lite-macos-arm64.app"
     end
-  
+    
     on_intel do
-      app "kubemanager_lite-macos-amd64.app"
+        app "kubemanager_lite-macos-amd64.app", target: "#{Dir.home}/Applications/kubemanager_lite-macos-amd64.app"
     end
   
     zap trash: [
