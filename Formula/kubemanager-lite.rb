@@ -9,7 +9,7 @@ class KubemanagerLite < Formula
 
   on_linux do
     url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-linux-amd64"
-    sha256 "PLACEHOLDER_SHA256_LINUX_AMD64"
+    sha256 "5a5ec088cdaa845983dcbc3faa8e91448919e3a1277cc2f3bf41ae0ff8afd3f1"
   end
 
   def install
