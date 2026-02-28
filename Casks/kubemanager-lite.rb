@@ -1,14 +1,14 @@
 cask "kubemanager-lite" do
-    version "1.1.2"
+    version "1.1.3"
   
     on_arm do
       url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-v#{version}-macos-arm64.zip"
-      sha256 "77548256f7a3aeeefc6d6b098820bf08494cfcf0127278c4f0e614176c2d1c08"
+      sha256 "4a49cbb2e2933c3bc9881ebb90687b74eff0914cf09159ab75db31722bb13d55"
     end
   
     on_intel do
       url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-v#{version}-macos-amd64.zip"
-      sha256 "f8ef3526b8df826fd8bf073ee52f839f2d2b27cab10cfec76f6222be7224e56d"
+      sha256 "18b2ef2fdc796ab29792aca8fe1650c8d3e3266dea779603519e4b16ba4de6b4"
     end
   
     name "KubeManager Lite"
