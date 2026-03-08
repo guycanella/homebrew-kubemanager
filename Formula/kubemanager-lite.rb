@@ -4,12 +4,12 @@
 class KubemanagerLite < Formula
   desc "Desktop app for real-time Docker container and Kubernetes pod management"
   homepage "https://github.com/guycanella/kubemanager-lite"
-  version "1.1.5"
+  version "1.1.6"
   license "MIT"
 
   on_linux do
     url "https://github.com/guycanella/kubemanager-lite/releases/download/v#{version}/kubemanager_lite-linux-amd64"
-    sha256 "3a2fe863bcde07f928f3a1ca972357c5a4c0185db1ae8bd57d5a1fe0c07cf420"
+    sha256 "46776bad2b95df0249330d77aa3465c7a3833c13e1dc62397f239dc691c56c35"
   end
 
   def install
